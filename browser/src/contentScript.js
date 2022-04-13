@@ -1,0 +1,1 @@
+console.log("Create Content Script");

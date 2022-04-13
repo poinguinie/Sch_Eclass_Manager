@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <link rel="stylesheet" href="./style/switch.css">
+    <link rel="stylesheet" href="./style/style.css">
+    <link rel="stylesheet" href="./style/darkmode.css">
+    <link rel="stylesheet" href="./style/button.css">
+    <link rel="stylesheet" href="./style/footer.css">
+</head>
+<body>
+    <div class="header">
+        <div class="logo">
+            <p id="name">S.E.M</p>
+            <p id="fullNm">Sch Eclass Manager</p><p id="version">version.0.3</p>
+        </div>
+        <div class="darkmodeBx">
+            <p>Dark Mode</p>
+            <label class="switch">
+                <input type="checkbox" id="darkmodeBtn">
+                <span class="slider round" id="slider"></span>
+            </label>
+        </div>
+    </div>
+    <div class="content">
+        <!-- <button>Button</button> -->
+        <!--
+        <button class="noSite notUsed">
+            이클래스 이외의 사이트에서는<br>
+            사용이 불가합니다.
+        </button>
+        -->
+        <button class="active" id="pdfBtn">
+            PDF 다운로드
+        </button>
+        <!--
+        <div id="desc">
+            <p>이클래스 이외의 사이트에서는 사용이 불가합니다.</p>
+        </div>
+        <div>
+            PDF 다운로드 <button id="pdfBtn">Download</button>
+        </div>
+        <div>
+            비디오 다운로드 (1)<button id="videoBtn">Download</button>
+        </div>
+        <div>
+            비디오 다운로드 (2)<button id="videoBtn2">Download</button>
+        </div>
+        -->
+    </div>
+    <div class="footer">
+        <a href="http://poinguinie.dothome.co.kr/sem/" target="_blank">사용법</a>
+        <a href="#">소스 코드</a>
+        <a href="#">개발자 문의</a>
+    </div>
+    <script src="./src/main.js" ></script>
+    <script src="./src/darkmode.js"></script>
+</body>
+</html>

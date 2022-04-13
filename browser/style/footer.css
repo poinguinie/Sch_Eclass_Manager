@@ -1,0 +1,25 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap');
+
+.footer {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 1%;
+}
+.footer > a {
+    width: 68px;
+    height: 20px;
+    text-align: center;
+    font-size: 0.9rem;
+    margin-bottom: 4px;
+    color: var(--boxColor);
+    text-decoration: none;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-weight: 300;
+}
+
+.footer > a:hover {
+    text-decoration: underline;
+    font-size: 1.1rem;
+    transition: 0.2s;
+    color:darkgray;
+}

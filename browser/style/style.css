@@ -1,0 +1,94 @@
+@import url('https://fonts.googleapis.com/css2?family=Red+Hat+Mono:wght@600&display=swap');
+
+:root[color-theme='light'] {
+    --background: #fff;
+    --boxColor: #161616;
+}
+
+:root[color-theme='dark'] {
+    --background: #161616;
+    --boxColor: #fff;
+}
+
+html {
+    background: var(--background);
+}
+
+body {
+    background: var(--background);
+    color: var(--boxColor);
+}
+
+* {
+    -ms-user-select: none; 
+    -moz-user-select: -moz-none; 
+    -webkit-user-select: none; 
+    -khtml-user-select: none; 
+    user-select:none;
+    font-family: 'Red Hat Mono';
+    margin: 0;
+    padding: 0;
+    font-size: 0.8rem;
+}
+:root {
+    --bacground: #F0F0F0;
+}
+body {
+    min-width: 350px;
+    min-height: 270px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.darkmode {
+    background-color: black;
+    color: white;
+}
+.header {
+    display: flex;
+    justify-content: space-between;
+}
+
+.logo {
+    margin-top: 0;
+    margin-left: 4%;
+}
+
+#name {
+    font-size: 3rem;
+    font-weight: 600;
+}
+
+#fullNm {
+    font-size: 0.8rem;
+    width: 100%;
+    text-align: right;
+}
+#version {
+    font-size: 0.4rem;
+    width: 100%;
+    text-align: right;
+    color: grey;
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 4%;
+}
+
+#desc {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+#desc > p {
+    font-size: 1rem;
+}
+
+.content > div {
+    margin: 4px;
+}
