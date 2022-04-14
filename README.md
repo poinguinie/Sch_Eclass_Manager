@@ -9,6 +9,8 @@
 
 S.E.M은 이전 lms 확장 프로그램인 lms++를 벤치마킹하여 제작되었습니다.
 
+> LMS++ Link : https://lpp.shj.rip/
+
 + 사용된 언어
     + Javascript
 
