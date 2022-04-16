@@ -83,14 +83,21 @@ async function init() {
 
                 const findTitle1 = "<title>";
                 const findTitle2 = "</title>";
-                const findTitle1Length = findTitle1.length + 1;
+                const findTitle1Length = findTitle1.length;
                 const titleStartIndex = data.indexOf(findTitle1) + findTitle1Length;;
                 const titleEndIndex = data.indexOf(findTitle2);
 
                 const title = data.substring(titleStartIndex, titleEndIndex);
+
+                const findDate = "<meta name=\"regdate\" content=\"";
+                const findDateLength = findDate.length;
+                const dateStartIndex = data.indexOf(findDate) + findDateLength;
+                
+                const date = data.substring(dateStartIndex, dateStartIndex + 14);
     
                 chrome.storage.sync.set({url});
                 chrome.storage.sync.set({title});
+                chrome.storage.sync.set({date});
     
             })
             .catch((e) => {
