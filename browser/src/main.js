@@ -1,5 +1,3 @@
-// import {download} from './download-master/download';
-
 pdfBtn.addEventListener("click", async () => {
     let [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
 
@@ -17,124 +15,48 @@ videoBtn.addEventListener("click", async () => {
     chrome.scripting.executeScript({
         target: { tabId: tab.id },
         func: downloadVideo,
-    }, (url) => {
-        console.log(url);
-    });
-});
-
-videoBtn2.addEventListener("click", async () => {
-    let [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
-
-    chrome.scripting.executeScript({
-        target: { tabId: tab.id },
-        func: downloadVideoSecond,
-    }, (url) => {
-        console.log(url);
+    }, (res) => {
+        if(res) {
+            videoBtn.innerHTML = "다운로드중입니다.<br>잠시 기다리십시오."
+        }
     });
 });
 
 
-function downloadPdf() {
-
-    chrome.runtime.sendMessage({download:"PDF",document: document}, (res) => {
-        console.log(res);
-    });
-    
-    let tool = document.getElementById("tool_content").contentWindow.document;
-    let innerIframe_1 = tool.getElementsByTagName("iframe")[0].contentWindow.document;
-    let innerIframe_2 = innerIframe_1.getElementsByTagName("iframe")[0];
-
-    let url = innerIframe_2.src;
-
-    fetch(url)
-    .then((response) => response.text())
-    .then((data) => {
-        const str1 = "property=\"og:image\" content=";
-        const str2 = "contents/web_files";
-        const str1Length = str1.length + 1;
-        const str2Length = str2.length;
-        const startIndex = data.indexOf(str1) + str1Length;
-        const endIndex = data.indexOf(str2) + str2Length;
-
-        const url = data.substring(startIndex, endIndex) + "/original.pdf";
-
-        const titleStart = "<title>";
-        const titleEnd = "</title>";
-        const titleIndex = data.indexOf(titleStart) + 7;
-        const titleEndIndex = data.indexOf(titleEnd);
-
-        const title = data.substring(titleIndex, titleEndIndex) + ".pdf";
-
-        const returnData = {url: url, title: title};
-
-        return returnData;
-    })
-    .then((data) => {
-        // return data;
-        fetch(data.url)
+async function downloadPdf() {
+    await chrome.storage.sync.get(null, (items) => {
+        console.log(items.url+"/web_files/original.pdf");
+        fetch(items.url+"/web_files/original.pdf")
         .then((res) => res.blob())
         .then((blob) => {
             const link = document.createElement('a');
             link.href = URL.createObjectURL(blob);
-            link.download = data.title;
+            link.download = items.title+".pdf";
             link.innerHTML = 'download';
             link.style.display = 'none';
             document.body.appendChild(link);
             link.click();
         })
         .catch((e) => console.log(e))
-    })
-    .catch((e) => {
-        console.log(e);
-    })
+    });
 }
 
-function downloadVideo() {
-    let tool = document.getElementById("tool_content").contentWindow.document;
-    let innerIframe_1 = tool.getElementsByTagName("iframe")[0].contentWindow.document;
-    let innerIframe_2 = innerIframe_1.getElementsByTagName("iframe")[0];
-
-    let url = innerIframe_2.src;
-
-    window.open(url)
-}
-
-async function downloadVideoSecond() {
-    let playBtn;
-    let video = document.getElementsByTagName("video")[0];
-
-    let title;
-    // console.log(video.currentSrc);
-    if (video.currentSrc === "https://commons.sch.ac.kr/viewer/uniplayer/preloader.mp4") {
-
-        title = document.title + ".mp4";
-
-        playBtn = document.getElementsByClassName("vc-front-screen-play-btn")[0];
-        playBtn.click();
-        
-        let muteBtn = document.getElementsByClassName("vc-pctrl-volume-btn")[0];
-        if (muteBtn.title === "음소거")
-            muteBtn.click();
-
-    }
-    await setTimeout(() => {
-        playBtn.click();
-    }, 1500);
-    await setTimeout(() => {
-        video = document.getElementsByTagName("video")[0];
-        console.log(video.src);
-        // window.open(video.src);
-        fetch(video.src)
+async function downloadVideo() {
+    await chrome.storage.sync.get(null, (items) => {
+        console.log(items.url+"/web_files/original.pdf");
+        fetch(items.url+"/media_files/screen.mp4")
         .then((res) => res.blob())
         .then((blob) => {
             const link = document.createElement('a');
             link.href = URL.createObjectURL(blob);
-            link.download = title;
+            link.download = items.title+".mp4";
             link.innerHTML = 'download';
             link.style.display = 'none';
             document.body.appendChild(link);
             link.click();
         })
         .catch((e) => console.log(e))
-    }, 500);
+    });
+
+    return true;
 }
