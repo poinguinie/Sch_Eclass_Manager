@@ -42,7 +42,7 @@ function init() {
     }).then(arg => {
         let res;
         if(arg) {
-            if(arg.indexOf('medlms') > 0) {
+            if(arg.indexOf('medlms') >= 0) {
                 let tool = document.getElementById("tool_content").contentWindow.document;
                 let icon = tool.getElementsByClassName("xnct-icon");
                 res = icon.length !== 0 ? { isSchoolPage: true, icon: icon[0].classList[1] } : { isSchoolPage: true, icon: null }

@@ -102,8 +102,13 @@ function downloadVideo() {
 async function downloadVideoSecond() {
     let playBtn;
     let video = document.getElementsByTagName("video")[0];
+
+    let title;
     // console.log(video.currentSrc);
     if (video.currentSrc === "https://commons.sch.ac.kr/viewer/uniplayer/preloader.mp4") {
+
+        title = document.title + ".mp4";
+
         playBtn = document.getElementsByClassName("vc-front-screen-play-btn")[0];
         playBtn.click();
         
@@ -118,7 +123,18 @@ async function downloadVideoSecond() {
     await setTimeout(() => {
         video = document.getElementsByTagName("video")[0];
         console.log(video.src);
-        chrome.downloads.download({url: video.src});
         // window.open(video.src);
+        fetch(video.src)
+        .then((res) => res.blob())
+        .then((blob) => {
+            const link = document.createElement('a');
+            link.href = URL.createObjectURL(blob);
+            link.download = title;
+            link.innerHTML = 'download';
+            link.style.display = 'none';
+            document.body.appendChild(link);
+            link.click();
+        })
+        .catch((e) => console.log(e))
     }, 500);
 }
