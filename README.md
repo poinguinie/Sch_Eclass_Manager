@@ -16,5 +16,5 @@ S.E.M은 이전 lms 확장 프로그램인 lms++를 벤치마킹하여 제작되
 
 + Manifest
     + version: v3
-    + permissions: "activeTab", "scripting", "storage"
+    + permissions: "activeTab", "scripting"
     + host_permissions: "https://eclass.sch.ac.kr/*", "https://medlms.sch.ac.kr/*"

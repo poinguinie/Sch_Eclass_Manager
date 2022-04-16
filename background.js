@@ -1,15 +1,18 @@
-chrome.runtime.onInstalled.addListener(async () => {
-    let [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
+let page = ["eclass.sch.ac.kr", "medlms.sch.ac.kr", "commons.sch.ac.kr"]
 
-    chrome.action.onClicked.addListener((tab) => {
-        chrome.scripting.executeScript({
-            target: { tabId: tab.id },
-            // files: ['contentScript.js'],
-            func: init,
-        });
-    })
-});
+chrome.runtime.onInstalled.addListener(() => {
+    chrome.storage.sync.set({page});
+})
 
-function init() {
-    console.log(location.href)
-}
+chrome.runtime.onMessage.addListener(
+    function(request, sender, sendResponse) {
+        if(request.status === "init") {
+            let getDocument = request.document;
+            console.log(getDocument);
+            /*let tool = getDocument.getElementById("tool_content").contentWindow.document;
+            let icon = tool.getElementsByClass("xnct-icon");
+            console.log(icon);*/
+            sendResponse({status: "success"});
+        }
+    }
+)

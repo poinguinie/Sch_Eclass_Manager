@@ -1,6 +1,44 @@
 // import {download} from './download-master/download';
 
+pdfBtn.addEventListener("click", async () => {
+    let [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
+
+    chrome.scripting.executeScript({
+        target: { tabId: tab.id },
+        func: downloadPdf,
+    }, (url) => {
+        console.log(url);
+    });
+});
+
+videoBtn.addEventListener("click", async () => {
+    let [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
+
+    chrome.scripting.executeScript({
+        target: { tabId: tab.id },
+        func: downloadVideo,
+    }, (url) => {
+        console.log(url);
+    });
+});
+
+videoBtn2.addEventListener("click", async () => {
+    let [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
+
+    chrome.scripting.executeScript({
+        target: { tabId: tab.id },
+        func: downloadVideoSecond,
+    }, (url) => {
+        console.log(url);
+    });
+});
+
+
 function downloadPdf() {
+
+    chrome.runtime.sendMessage({download:"PDF",document: document}, (res) => {
+        console.log(res);
+    });
     
     let tool = document.getElementById("tool_content").contentWindow.document;
     let innerIframe_1 = tool.getElementsByTagName("iframe")[0].contentWindow.document;
@@ -32,6 +70,7 @@ function downloadPdf() {
         return returnData;
     })
     .then((data) => {
+        // return data;
         fetch(data.url)
         .then((res) => res.blob())
         .then((blob) => {
@@ -83,37 +122,3 @@ async function downloadVideoSecond() {
         // window.open(video.src);
     }, 500);
 }
-
-
-pdfBtn.addEventListener("click", async () => {
-    let [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
-
-    chrome.scripting.executeScript({
-        target: { tabId: tab.id },
-        func: downloadPdf,
-    }, () => {
-        // console.log(document);
-    });
-});
-
-videoBtn.addEventListener("click", async () => {
-    let [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
-
-    chrome.scripting.executeScript({
-        target: { tabId: tab.id },
-        func: downloadVideo,
-    }, () => {
-        // console.log(document);
-    });
-});
-
-videoBtn2.addEventListener("click", async () => {
-    let [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
-
-    chrome.scripting.executeScript({
-        target: { tabId: tab.id },
-        func: downloadVideoSecond,
-    }, () => {
-        // console.log(video.src);
-    });
-})

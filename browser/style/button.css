@@ -20,6 +20,10 @@ button {
     font-weight: 500;
     font-family: 'Noto Sans KR', sans-serif;
     color: white;
+    display: none;
+}
+button.active {
+    display: block;
 }
 button:hover {
     transition: 0.2s;
@@ -27,9 +31,8 @@ button:hover {
     box-shadow: 0 5px 5px var(--grey);
     cursor: pointer;
 }
-button.notUsed {
+button#notUsed, button#notContentBtn {
     background-color: var(--grey);
-    border: 0.6px solid white;
     color: white;
 }
 /*button.notUsed:hover {

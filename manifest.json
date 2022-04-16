@@ -1,7 +1,7 @@
 {
     "name": "Sch Eclass Manager",
-    "description": "Sch Eclass Manager Test Version",
-    "version": "0.2",
+    "description": "Sch Eclass Manager Beta Version",
+    "version": "0.3",
     "manifest_version": 3,
     "background": {
         "service_worker": "background.js"
@@ -9,8 +9,7 @@
     "permissions": [
         "activeTab",
         "scripting",
-        "storage",
-        "downloads"
+        "storage"
     ],
     "host_permissions": [
         "https://eclass.sch.ac.kr/*",
@@ -30,5 +29,6 @@
         "32": "/images/favicon-32x32.png",
         "48": "/images/favicon-48x48.png",
         "128": "/images/favicon-128x128.png"
-    }
+    },
+    "options_page": "./options/index.html"
 }
