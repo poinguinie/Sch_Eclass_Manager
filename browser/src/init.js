@@ -15,7 +15,7 @@ window.addEventListener("load", async () => {
             const notContentBtn = document.getElementById("notContentBtn");
             if (icon === "pdf") {
                 pdfBtn.classList.toggle("active");
-            } else if (icon === "mp4") {
+            } else if (icon === "mp4" || icon === "movie") {
                 videoBtn.classList.toggle("active");
             } else if (icon === "downloadVideo") {
                 videoBtn2.classList.toggle("active");
