@@ -1,9 +1,8 @@
 ## SCH ECLASS MANAGER
 #### version 0.6
-------------
+
 > 현재 베타 테스터 중입니다.
 > 레이아웃, 디자인, 기능등이 추가되거나 수정될 예정입니다.
-------------
 
 [사용법](http://poinguinie.dothome.co.kr/sem/)
 
