@@ -2,12 +2,12 @@
 
 :root[color-theme='light'] {
     --main: #D5E05B;
-    --grey: #474747;
+    --grey: #A7A9AC;
 }
 
 :root[color-theme='dark'] {
     --main: #80B463;
-    --grey: #909090;
+    --grey: #A7A9AC;
 }
 
 button {
