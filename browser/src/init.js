@@ -1,3 +1,8 @@
+const pdfBtn = document.getElementById("pdfBtn");
+const videoBtn = document.getElementById("videoBtn");
+const videoBtn2 = document.getElementById("videoBtn2");
+const notContentBtn = document.getElementById("notContentBtn");
+
 window.addEventListener("load", async () => {    
     let [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
 
@@ -5,13 +10,11 @@ window.addEventListener("load", async () => {
         target: { tabId: tab.id },
         func: init
     }, (res) => {
-        const result = res!== null ? res[0].result : null;
+        if(res === null || res === "") return;
+        const result = res[0].result;
+        console.log(res);
         if (result.isSchoolPage) {
             const icon = result.icon;
-            const pdfBtn = document.getElementById("pdfBtn");
-            const videoBtn = document.getElementById("videoBtn");
-            const videoBtn2 = document.getElementById("videoBtn2");
-            const notContentBtn = document.getElementById("notContentBtn");
             if (icon === "pdf") {
                 pdfBtn.classList.toggle("active");
             } else if (icon === "mp4" || icon === "movie") {
@@ -30,6 +33,22 @@ window.addEventListener("load", async () => {
 
 async function init() {
     const url = location.host;
+    
+    const crawling = (body, str1, str2) => {
+        const str1Length = str1.length;
+        const startIndex = body.indexOf(str1) + str1Length;
+        const endIndex = str2 !== null ? body.indexOf(str2) : startIndex + 14;
+
+        return body.substring(startIndex, endIndex);
+    }
+
+    if (url === null) {
+        return {
+            isSchoolPage: false,
+            icon: null
+        }
+    }
+    
     let result = new Promise((resolve, reject) => {
         chrome.storage.sync.get("page", ({page}) => {
             if (page.includes(url)) {
@@ -39,6 +58,13 @@ async function init() {
             }
         });
     }).then(arg => {
+        console.log(arg);
+        if(arg === false) {
+            return {
+                isSchoolPage: false,
+                icon: null
+            }
+        }
         let tool = document.getElementById("tool_content") ? document.getElementById("tool_content").contentWindow.document : null;
         if(tool !== null) {
             let icon = tool.getElementsByClassName("xnct-icon");
@@ -62,6 +88,7 @@ async function init() {
         return res;
     });
 
+
     result.then(result => {
         if (result.isSchoolPage && (result.icon === "pdf" || result.icon === "mp4" || result.icon === "movie")) {            
             let tool = document.getElementById("tool_content").contentWindow.document;
@@ -73,27 +100,9 @@ async function init() {
             fetch(url)
             .then((response) => response.text())
             .then((data) => {
-                const str1 = "property=\"og:image\" content=";
-                const str2 = "/web_files/slides/thumbnails";
-                const str1Length = str1.length + 1;
-                const startIndex = data.indexOf(str1) + str1Length;
-                const endIndex = data.indexOf(str2);
-    
-                const url = data.substring(startIndex, endIndex);
-
-                const findTitle1 = "<title>";
-                const findTitle2 = "</title>";
-                const findTitle1Length = findTitle1.length;
-                const titleStartIndex = data.indexOf(findTitle1) + findTitle1Length;;
-                const titleEndIndex = data.indexOf(findTitle2);
-
-                const title = data.substring(titleStartIndex, titleEndIndex);
-
-                const findDate = "<meta name=\"regdate\" content=\"";
-                const findDateLength = findDate.length;
-                const dateStartIndex = data.indexOf(findDate) + findDateLength;
-                
-                const date = data.substring(dateStartIndex, dateStartIndex + 14);
+                const url = crawling(data, "property=\"og:image\" content=\"", "/web_files/slides/thumbnails")
+                const title = crawling(data, "<title>", "</title>");
+                const date = crawling(data, "<meta name=\"regdate\" content=\"", null);
     
                 chrome.storage.sync.set({url});
                 chrome.storage.sync.set({title});
@@ -103,7 +112,6 @@ async function init() {
             .catch((e) => {
                 console.log(e);
             });
-            
         }
     })    
     return result;
