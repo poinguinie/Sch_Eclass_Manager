@@ -7,7 +7,8 @@
     
     <link rel="stylesheet" href="./style/switch.css">
     <link rel="stylesheet" href="./style/style.css">
-    <link rel="stylesheet" href="./style/darkmode.css">
+    <link rel="stylesheet" href="./style/darkmode.css"> 
+    <link rel="stylesheet" href="./style/progressbar.css">
     <link rel="stylesheet" href="./style/button.css">
     <link rel="stylesheet" href="./style/footer.css">
 </head>
@@ -40,9 +41,20 @@
         <button id="videoBtn">
             비디오 다운로드
         </button>
+        <button id="downloadingBtn">
+            <div class="circle_progress_wrap">
+                <svg class="circle_progress" width="80" height="80" viewBox="0 0 80 80">
+                <circle class="frame" cx="38" cy="38" r="32" stroke-width="7" />
+                <circle class="bar" cx="38" cy="38" r="32" stroke-width="7" />
+                </svg>
+                <div>
+                    <strong class="value"></strong>
+                </div>
+            </div>
+        </button>
     </div>
     <div class="footer">
-        <a href="http://poinguinie.dothome.co.kr/sem/" target="_blank">사용법</a>
+        <a href="https://poinguinie.github.io/Sch-Eclass-Manager-Homepage/" target="_blank">사용법</a>
         <a href="https://github.com/poinguinie/Sch_Eclass_Manager" target="_blank">소스 코드</a>
         <a href="https://open.kakao.com/o/s97TgAbe" target="_blank">개발자 문의</a>
     </div>

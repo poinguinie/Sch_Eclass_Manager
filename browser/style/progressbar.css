@@ -1,0 +1,42 @@
+:root[color-theme='light'] {
+    --main: #D5E05B;
+}
+
+:root[color-theme='dark'] {
+    --main: #80B463;
+}
+
+.circle_progress_wrap {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.circle_progress { 
+    transform: rotate(-90deg); 
+}   
+.frame, .bar { 
+    fill: none; 
+}
+.frame { 
+    stroke: #e6e6e6; 
+}
+.bar {
+  stroke: #2980B9;
+  stroke-linecap: round;
+}
+.circle_progress_wrap > div {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+.value {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #888;
+  font-size: 14px;
+  line-height: 80px;
+}
