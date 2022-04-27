@@ -17,10 +17,10 @@ window.addEventListener("load", async () => {
             const icon = result.icon;
             if (icon === "pdf") {
                 pdfBtn.classList.toggle("active");
-            } else if (icon === "mp4" || icon === "movie") {
-                videoBtn.classList.toggle("active");
             } else if (icon === "downloadVideo") {
                 videoBtn2.classList.toggle("active");
+            } else if (icon !== null) {
+                videoBtn.classList.toggle("active");
             } else {
                 notContentBtn.classList.toggle("active");
             }
@@ -90,7 +90,8 @@ async function init() {
 
 
     result.then(result => {
-        if (result.isSchoolPage && (result.icon === "pdf" || result.icon === "mp4" || result.icon === "movie")) {            
+        // (result.icon === "pdf" || result.icon === "mp4" || result.icon === "movie")
+        if (result.isSchoolPage && result.icon !== null && result.icon !== "null" && result !== 'downloadVideo') {            
             let tool = document.getElementById("tool_content").contentWindow.document;
             let innerIframe_1 = tool.getElementsByTagName("iframe")[0].contentWindow.document;
             let innerIframe_2 = innerIframe_1.getElementsByTagName("iframe")[0];
