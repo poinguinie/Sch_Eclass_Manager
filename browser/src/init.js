@@ -4,7 +4,6 @@ const videoBtn2 = document.getElementById("videoBtn2");
 const notContentBtn = document.getElementById("notContentBtn");
 
 
-
 window.addEventListener("load", async () => {    
 
     let [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
@@ -18,15 +17,14 @@ window.addEventListener("load", async () => {
         console.log(res);
         if (result.isSchoolPage) {
             const icon = result.icon;
-            fetch("./data/icon.json")
+            fetch("../../data/icon.json")
             .then(response => {
                 return response.json();
             })
             .then(jsondata => {
-                console.log(jsondata);
-                if (jsondata["result"]["pdf"].includes(icon)) {
+                if (jsondata["result"][0]["pdf"].includes(icon)) {
                     pdfBtn.classList.toggle("active");
-                } else if (jsondata["result"]["video"].includes(icon)) {
+                } else if (jsondata["result"][1]["video"].includes(icon)) {
                     videoBtn.classList.toggle("active");
                 } else if (icon === "downloadVideo") {
                     videoBtn2.classList.toggle("active");
@@ -80,8 +78,6 @@ async function init() {
         if(tool !== null) {
             let icon = tool.getElementsByClassName("xnct-icon");
             res = icon.length !== 0 ? { isSchoolPage: true, icon: icon[0].classList[1] } : { isSchoolPage: true, icon: null }
-            console.log(icon[0]);
-            console.log(icon[0].style.background-image);
         } else if (arg.indexOf('eclass') >= 0 || arg.indexOf('medlms') >= 0){
             res = {
                 isSchoolPage: true,

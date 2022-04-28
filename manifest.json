@@ -1,7 +1,7 @@
 {
     "name": "Sch Eclass Manager",
     "description": "순천향대학교 이클래스 사용 도우미",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "manifest_version": 3,
     "background": {
         "service_worker": "background.js"
