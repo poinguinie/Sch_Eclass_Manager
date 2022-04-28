@@ -1,0 +1,36 @@
+{
+    "status": "200",
+    "result": [
+        {
+            "pdf": [
+                "pdf"
+            ]
+        },
+        {
+            "video": [
+                "embed",
+                "estage",
+                "everlec",
+                "external_video",
+                "howlimage",
+                "lecturecam",
+                "movie",
+                "movie360",
+                "mp4",
+                "oncast",
+                "photoset",
+                "readystream",
+                "screenlecture",
+                "ssslide",
+                "ssz",
+                "syncthink",
+                "video",
+                "wbtzip",
+                "webstudio",
+                "xenoglobal",
+                "xenoglobalembed",
+                "zoom"
+            ]
+        }
+    ]
+}

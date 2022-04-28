@@ -3,7 +3,10 @@ const videoBtn = document.getElementById("videoBtn");
 const videoBtn2 = document.getElementById("videoBtn2");
 const notContentBtn = document.getElementById("notContentBtn");
 
+
+
 window.addEventListener("load", async () => {    
+
     let [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
 
     chrome.scripting.executeScript({
@@ -15,15 +18,23 @@ window.addEventListener("load", async () => {
         console.log(res);
         if (result.isSchoolPage) {
             const icon = result.icon;
-            if (icon === "pdf") {
-                pdfBtn.classList.toggle("active");
-            } else if (icon === "downloadVideo") {
-                videoBtn2.classList.toggle("active");
-            } else if (icon !== null) {
-                videoBtn.classList.toggle("active");
-            } else {
-                notContentBtn.classList.toggle("active");
-            }
+            fetch("./data/icon.json")
+            .then(response => {
+                return response.json();
+            })
+            .then(jsondata => {
+                console.log(jsondata);
+                if (jsondata["result"]["pdf"].includes(icon)) {
+                    pdfBtn.classList.toggle("active");
+                } else if (jsondata["result"]["video"].includes(icon)) {
+                    videoBtn.classList.toggle("active");
+                } else if (icon === "downloadVideo") {
+                    videoBtn2.classList.toggle("active");
+                } else {
+                    notContentBtn.classList.toggle("active");
+                }
+            })
+            .catch(e => console.log(e))          
         } else {
             const notHomepageBtn = document.getElementById("notHomepageBtn");
             notHomepageBtn.classList.toggle("active");
@@ -69,6 +80,8 @@ async function init() {
         if(tool !== null) {
             let icon = tool.getElementsByClassName("xnct-icon");
             res = icon.length !== 0 ? { isSchoolPage: true, icon: icon[0].classList[1] } : { isSchoolPage: true, icon: null }
+            console.log(icon[0]);
+            console.log(icon[0].style.background-image);
         } else if (arg.indexOf('eclass') >= 0 || arg.indexOf('medlms') >= 0){
             res = {
                 isSchoolPage: true,
