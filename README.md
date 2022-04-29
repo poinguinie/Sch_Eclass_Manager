@@ -1,10 +1,7 @@
 ## SCH ECLASS MANAGER
-#### version 0.6
+#### version 1.0.1
 
-> 현재 베타 테스터 중입니다.
-> 레이아웃, 디자인, 기능등이 추가되거나 수정될 예정입니다.
-
-[사용법](http://poinguinie.dothome.co.kr/sem/)
+[사용법](https://poinguinie.github.io/Sch-Eclass-Manager-Homepage/)
 
 S.E.M은 이전 lms 확장 프로그램인 lms++를 벤치마킹하여 제작되었습니다.
 
