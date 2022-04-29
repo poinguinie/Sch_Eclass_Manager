@@ -5,7 +5,8 @@
 
 S.E.M은 이전 lms 확장 프로그램인 lms++를 벤치마킹하여 제작되었습니다.
 
-개발 기간 : 2022.4.12 ~
+개발 기간 : 2022.4.12 ~ 
+
 개발자 : Poinguinie (이지호) ([개발자에게 연락하기](https://open.kakao.com/o/s97TgAbe))
 
 > [LMS++](https://lpp.shj.rip/)
