@@ -106,6 +106,8 @@ async function init() {
             let innerIframe_2 = innerIframe_1.getElementsByTagName("iframe")[0];
     
             let url = innerIframe_2.src;
+           
+            chrome.storage.sync.set({icon: result.icon});
     
             fetch(url)
             .then((response) => response.text())

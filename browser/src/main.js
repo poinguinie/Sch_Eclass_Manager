@@ -1,13 +1,3 @@
-var circleProgressBar = "<div class=\"circle_progress_wrap\">\
-<svg class=\"circle_progress\" width=\"120\" height=\"120\" viewBox=\"0 0 120 120\">\
-  <circle class=\"frame\" cx=\"60\" cy=\"60\" r=\"54\" stroke-width=\"12\" />\
-  <circle class=\"bar\" cx=\"60\" cy=\"60\" r=\"54\" stroke-width=\"12\" />\
-</svg>\
-<strong class=\"value\"></strong>\
-</div>"
-
-
-
 pdfBtn.addEventListener("click", async () => {
     let [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
 
@@ -23,7 +13,7 @@ videoBtn.addEventListener("click", async () => {
     chrome.scripting.executeScript({
         target: { tabId: tab.id },
         func: downloadVideo,
-    }, (res) => {
+    }, async (res) => {
         var fetchFun = (url, title) => {
             var blob;
             var bar;
@@ -80,15 +70,17 @@ videoBtn.addEventListener("click", async () => {
         }
         
         let items = res[0].result;
-        if(items.date.substring(0, 4) === "2022") {
+        if (items.icon == "screenlecture") {
+            fetchFun(items.url + items.videoUrl[2], items.title);
+            videoBtn.classList.toggle("active");
+            downloadingBtn.classList.toggle("active");
+        }
+        else if(items.date.substring(0, 4) === "2022") {
             fetchFun(items.url + items.videoUrl[0], items.title);
-            // videoBtn.innerHTML = "다운로드중입니다.<br>잠시 기다리십시오.<br><progress id=\"progress\" max=\"100\" value=\"0\"</progress>"
             videoBtn.classList.toggle("active");
             downloadingBtn.classList.toggle("active");
         } else {
             fetchFun(items.url + items.videoUrl[1], items.title);
-            // videoBtn.innerHTML = "다운로드중입니다.<br>잠시 기다리십시오.<br><progress id=\"progress\" max=\"100\" value=\"0\"</progress>"
-            // videoBtn.innerHTML = circleProgressBar;
             videoBtn.classList.toggle("active");
             downloadingBtn.classList.toggle("active");
         }
